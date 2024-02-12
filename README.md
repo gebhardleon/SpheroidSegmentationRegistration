@@ -23,14 +23,22 @@ If you encounter problems along the way make sure you have conda correctly insta
 
     conda install --file environment_packages.txt
 
-3. Download weights. Choose between the huge, large or base model. 
+3. Download the Segment Anything model (doc via https://github.com/facebookresearch/segment-anything/). Choose between the huge, large or base model.
+   
     huge (default): https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth
+   
     large: https://dl.fbaipublicfiles.com/segment_anything/sam_vit_l_0b3195.pth
+   
     base: https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth
 
    I did all the tests with the huge model, which takes about 20 seconds for a frame of 500kb. 
    Probably, the smaller ones would also work but if you don't have huge datasets, I recommend to just stick with the huge model which works great.
-   
+
+
+## Usage Registration & Segmentation
+
+
+
 
 
 
