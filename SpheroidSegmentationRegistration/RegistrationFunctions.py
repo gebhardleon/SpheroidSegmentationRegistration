@@ -135,17 +135,7 @@ def overlay_piv_on_video(video_path, output_video_path, u, v ):
     cap.release()
     cv2.destroyAllWindows()
 
-def calculate_piv2(image1, image2, mask):
-    settings = windef.PIVSettings()
-    settings.roi = 'full'
-    settings.correlation_method = 'linear'
 
-    settings.frame_pattern_a = 'exp1_001_a.bmp'
-    settings.frame_pattern_b = 'exp1_001_b.bmp'
-    settings.correlation_method = 'linear'
-
-
-    return u2, v2
 
 def overlay_piv_on_video2(videopath, output_path, u, v):
     cap = cv2.VideoCapture(videopath)
