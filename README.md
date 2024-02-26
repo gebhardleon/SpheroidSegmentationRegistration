@@ -37,6 +37,9 @@ If you encounter problems along the way make sure you have conda correctly insta
 
 ## Usage Registration & Segmentation
 
+1. Adjust Paths
+2. 
+
 
 
 
