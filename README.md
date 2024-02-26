@@ -40,14 +40,22 @@ If you encounter problems along the way make sure you have conda correctly insta
 1. Adjust Paths
 2. 
 
+## PIV analysis
 
+general guide via (https://de.mathworks.com/matlabcentral/fileexchange/27659-pivlab-particle-image-velocimetry-piv-tool-with-gui) 
 
-
-
-
-
-
-  
-
-
+1. Import Images
+2. Select folder with (registered) images
+3. Select images + "import"
+4. Image Settings  - Exclusion
+    --> select ROI
+5. Image Settings - Image pre-processing
+       --> Apply and preview current frame
+6. Analysis - PIV Settings
+7. Analysis - ANALYZE! - Analyze all frames
+8. Calibration
+9. Validation
+    --> find image and velocity based criterias for the specific data (e.g. filter low threshhold = 0.001)
+10. File --> Export --> Mat file --> Export all frames
+11. File --> Export --> image / video --> Export all frames
 
