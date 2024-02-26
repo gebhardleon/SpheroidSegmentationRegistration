@@ -70,3 +70,7 @@ general guide via (https://de.mathworks.com/matlabcentral/fileexchange/27659-piv
 2. change the PIVFilePath to the the PIV data in .m format
 3. change the outputpath to the desired output folder. The heatmaps will be saved here.
 
+
+## Help
+I'm happy if the codes find use - feel free to contact me for further questions via leon.gebhard@polytechnique.edu
+
