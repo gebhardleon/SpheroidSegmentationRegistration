@@ -8,8 +8,9 @@ from RegistrationFunctions import *
 import os
 
 # paths
-stacks = ['Chip3'] # list with folders to be preprocessed
-image_stem_name =  ['Chip3_']# stem name of the images for each stack
+stacks = ['Expansion'] # list with folders to be preprocessed
+image_stem_name =  ['SubstackExpansion']# stem name of the images for each stack
+input_basepath = '/Users/leongebhard/Desktop/X/PRL/Relaxation/RawStacks/' # path to the raw image stacks
 sam_path = "/Users/leongebhard/Desktop/X/PRL/Python/sam_vit_h_4b8939.pth" # path to the segment anything model
 output_base_path = '/Users/leongebhard/Desktop/X/PRL/Relaxation/PreprocessedStacks/' # path to save the preprocessed images
 register_image = True # decide if images should be registered
@@ -30,7 +31,7 @@ masks = []
 
 for nr,stack in enumerate(stacks):
     output_path = os.path.join(output_base_path, stack)
-    imagestack_path = os.path.join('/Users/leongebhard/Desktop/X/PRL/Relaxation/RawStacks/', stack)
+    imagestack_path = os.path.join(input_basepath, stack)
     number_of_pictures = len(os.listdir(imagestack_path)) -1
     print('Preprocessing stack ' + stack + ' with ' + str(number_of_pictures) + ' images')
 

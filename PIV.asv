@@ -169,11 +169,11 @@ hold off;
 
 %% plot oscilating expontential
 
-%constant_oscil_fun = @(coeff, x) coeff(1) * exp(coeff(2) * x) +  coeff(3) * exp(coeff(4) * x) +sin(coeff(6)*x+coeff(7)) * coeff(5);
-exp_oscil_fun = @(coeff, x) coeff(1) * exp(coeff(2) * x) + coeff(3) * exp(coeff(4) * x)  + coeff(5).* sin(coeff(6) * x + coeff(7));
-initial_guess_osc = [max(avg_vel), -1, max(avg_vel), -1, min(avg_vel),pi , 0]; % Initial guess for coefficients
-%coefficients_osc_const = lsqcurvefit(exponential_fun, initial_guess_osc, time, avg_vel);
-coefficients_osc = lsqcurvefit(exp_oscil_fun, initial_guess_osc, time, avg_vel);
+constant_oscil_fun = @(coeff, x) coeff(1) * exp(coeff(2) * x) +  coeff(3) * exp(coeff(4) * x) +sin(coeff(6)*x+coeff(7)) * coeff(5);
+exp_oscil_fun = @(coeff, x) coeff(1) * exp(coeff(2) * x) +  coeff(3) *sin(coeff(6)*x+coeff(7))* exp(coeff(4) * x) +coeff(5);
+initial_guess_osc = [max(peak_vel), -0.01, max(peak_vel), -0.01, min(peak_vel), pi, 0]; % Initial guess for coefficients
+coefficients_osc_const = lsqcurvefit(exponential_fun, initial_guess_osc, time, avg_vel);
+coefficients_osc = lsqcurvefit(exponential_fun, initial_guess_osc, time, avg_vel);
 
 
 figure
@@ -187,7 +187,7 @@ fitted_osc_exp_curve = exp_oscil_fun(coefficients_osc, time);
 plot(time, fitted_osc_exp_curve, 'r', 'DisplayName', 'Exponential Fit', 'LineWidth',2);
 %plot(time, fit_1,  '--', 'DisplayName', 'Contribution first exp+C','LineWidth',2);
 %plot(time, fit_2,  '-.', 'DisplayName', 'Contribution second exp+C','LineWidth',2);
-title(['v(t) / [m/s] = ' num2str(coefficients_osc(1)) ' exp(t/' num2str(coefficients_osc(2)^-1) 's) + ' num2str(coefficients_osc(3)) ' exp(t/' num2str(coefficients_osc(4)^-1) 's) + ' num2str(coefficients_osc(5)) ]);
+title(['v(t) / [m/s] = ' num2str(coefficients_osc(1)) ' exp(t/' num2str(coefficients_osc(2)^-1) 's) + ' num2str(coefficients(3)) ' exp(t/' num2str(coefficients(4)^-1) 's) + ' num2str(coefficients(5)) ]);
 
 xlabel('Time / s')
 ylabel('Average intra-spheroid velocity / 10^{-8} m/s')
