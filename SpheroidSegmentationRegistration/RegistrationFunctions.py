@@ -9,6 +9,7 @@ from openpiv import pyprocess
 import numpy as np
 import pathlib
 import importlib_resources
+import os.path
 from time import time
 import warnings
 
@@ -159,4 +160,5 @@ def overlay_piv_on_video2(videopath, output_path, u, v):
                 on_img=True,  # overlay on the image
                 image_name=str(output_path + 'frame_' + str(frame_num) + '.bmp'),
             );
+            os.path.join(data_folder, "raw_data.txt")
             plt.close()

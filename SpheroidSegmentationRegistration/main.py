@@ -6,6 +6,7 @@ from segment_anything import sam_model_registry, SamPredictor, SamAutomaticMaskG
 from SegmentationFunctions import *
 from RegistrationFunctions import *
 import os
+
 # paths
 stacks = ['Chip3'] # list with folders to be preprocessed
 image_stem_name =  ['Chip3_']# stem name of the images for each stack
@@ -13,7 +14,7 @@ sam_path = "/Users/leongebhard/Desktop/X/PRL/Python/sam_vit_h_4b8939.pth" # path
 output_base_path = '/Users/leongebhard/Desktop/X/PRL/Relaxation/PreprocessedStacks/' # path to save the preprocessed images
 register_image = True # decide if images should be registered
 #                     # if no relevant movement of the object is expected, this can be set to False to prevent artefacts
-
+area_deviation_threshold = 0.04 # threshold for the change in mask area to reinitialise the mask and registration
 
 device = 'mps' if torch.backends.mps.is_available() else 'cpu' # check if m1 mac acceleration is available
 device = 'cuda' if torch.cuda.is_available() else device # check if cuda gpu acceleration is available
@@ -28,8 +29,8 @@ mask_area = 1
 masks = []
 
 for nr,stack in enumerate(stacks):
-    output_path = output_base_path + stack + '/'
-    imagestack_path = '/Users/leongebhard/Desktop/X/PRL/Relaxation/RawStacks/' + stack + '/'
+    output_path = os.path.join(output_base_path, stack)
+    imagestack_path = os.path.join('/Users/leongebhard/Desktop/X/PRL/Relaxation/RawStacks/', stack)
     number_of_pictures = len(os.listdir(imagestack_path)) -1
     print('Preprocessing stack ' + stack + ' with ' + str(number_of_pictures) + ' images')
 
@@ -37,7 +38,7 @@ for nr,stack in enumerate(stacks):
     end = number_of_pictures
 
     print('loading the first image to intialise the segmentation')
-    image = cv2.imread(imagestack_path+ image_stem_name[nr] +str(start).zfill(4)+'.tif')
+    image = cv2.imread(os.path.join(imagestack_path, image_stem_name[nr] +str(start).zfill(4)+'.tif'))
     predictor.set_image(image)
     input_points, input_label = get_input_points(image)
     # predict the masks
@@ -54,7 +55,7 @@ for nr,stack in enumerate(stacks):
     for i in range(start, end):
         # load the next image
         print('Image ' + str(i) + ' of ' + str(number_of_pictures))
-        image = cv2.imread(imagestack_path + image_stem_name[nr] + str(i).zfill(4) + '.tif')
+        image = cv2.imread(os.path.join(imagestack_path, image_stem_name[nr] + str(i).zfill(4) + '.tif'))
         # contrast stretch the image
         image = (image - np.min(image)) / (np.max(image) - np.min(image))
         image = (image * 255).astype(np.uint8)
@@ -115,7 +116,7 @@ for nr,stack in enumerate(stacks):
                 image = register_images(last_image, image)
 
             last_image = image
-        cv2.imwrite(output_path +'/' + stack + str(i).zfill(4) + '.tif', image)
+        cv2.imwrite(os.path.join(output_path,image_stem_name + str(i).zfill(4) + '.tif'), image)
 
         cv2.destroyAllWindows()
 
