@@ -1,13 +1,10 @@
 clear
 %% load PIV data
-%segments = {[2 144] [146 315] [317 358]};
 
 addpath('/Users/leongebhard/Desktop/X/PRL/SpheroidSegmentationRegistration') % add path to folder of the PIV_analysis file
-%PathsFilePath = '/Users/leongebhard/Desktop/X/PRL/Relaxation/PIV/Expansion/Expansion_NoSegmentation.mat' ;
 PathsFilePath = '/Users/leongebhard/Desktop/X/PRL/Relaxation/PIV/2024_02_09_Chip1/Chip1.mat' ;
 output_path = '/Users/leongebhard/Desktop/X/PRL/Relaxation/figures/2024_02_09_Chip1/';
-%PathsFilePath = '/Users/leongebhard/Desktop/X/PRL/20230805_exp1/PIVs/Stack1BL/stack1BL.mat' ;
-%output_path = '/Users/leongebhard/Desktop/X/PRL/20230805_exp1/Heatmaps/1BL/';
+
 segment_length = 10;
 frame_selection = []; % for example 1:200
 save_heatmaps = 0;
@@ -40,9 +37,6 @@ for i =1:length(u) - segment_length
     segments{end+1} = [i i + segment_length];
 
 end
-% for i =1:round(length(u)/segment_length-0.5)-1 %round(length(u)/segment_length-0.5)-1
-%     segments{end+1} = [i*segment_length i*segment_length+segment_length];
-% end
 
 
 
